@@ -21,7 +21,7 @@ const Projects = () => {
       description: "A landing page for a fictional university built with React and Tailwind.",
       image: smitLanding,
       github: "https://github.com/ahmedsaleemdayala/SMIT-Landing-Page",
-      live: "https://your-live-demo.com",
+      live: "https://sylanimitlp.netlify.app/",
       tags: ["React", "Node", "Tailwind"]
     },
     {
@@ -30,7 +30,7 @@ const Projects = () => {
       description: "A beautiful landing page for a travel agency built with React and Tailwind.",
       image: travel,
       github: "https://github.com/ahmedsaleemdayala/Landing-Page-Travel",
-      live: "https://your-live-demo.com",
+      live: "https://landingtravelpge.netlify.app/",
       tags: ["React", "Node"]
     },
    
