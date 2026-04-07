@@ -1,10 +1,10 @@
 import React from 'react';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'; // React Icons use kar rahe hain
-import alghiza from '../assets/Al-Ghiza.png';
-import bykea from '../assets/Bykea.png';
+import alghiza from '../assets/al-Ghiza.png';
+import bykea from '../assets/bykea.png';
 import cake from '../assets/caklora.png';
 import food from '../assets/foodpanda.png';
-import stitch from '../assets/Stitchbystitch.png';
+import stitch from '../assets/stitchbystitch.png';
 import smit from '../assets/smit-feedback.png';
 import travel from '../assets/travel.png';
 import smitLanding from '../assets/smit.png';

@@ -1,8 +1,8 @@
 import React from 'react';
 import { FaLinkedin, FaGithub, FaWhatsapp } from 'react-icons/fa';
 import Ahmed from '../assets/Ahmed Saleem.jpeg';
-import Hassan from '../assets/hassan.jpeg';
-import Farrukh from '../assets/farrukh.png';
+import Hassan from '../assets/Hassan.jpeg';
+import Farrukh from '../assets/Farrukh.png';
 import ayesha from '../assets/ayesha.jpg';
 
 
