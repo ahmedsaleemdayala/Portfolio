@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Autoplay } from 'swiper/modules';
 import { FaQuoteLeft } from 'react-icons/fa';
 import sarah from '../assets/sarah.jfif';
-import sobia from '../assets/sobia.webp';
+import sobia from '../assets/Sobia.webp';
 import maria from '../assets/maria.jfif';
 import aisha from '../assets/ayesha-o.jpg';
 

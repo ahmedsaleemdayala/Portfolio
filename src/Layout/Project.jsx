@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'; // React Icons use kar rahe hain
-import alghiza from '../assets/al-Ghiza.png';
+import alghiza from '../assets/al-ghiza.png';
 import bykea from '../assets/bykea.png';
 import cake from '../assets/caklora.png';
 import food from '../assets/foodpanda.png';
