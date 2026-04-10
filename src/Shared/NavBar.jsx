@@ -22,7 +22,7 @@ const Navbar = () => {
           {/* Left: Logo */}
           <div className="shrink-0 flex items-center">
             <span className="text-2xl font-bold tracking-tighter bg-linear-to-r from-[#3b82f6] via-[#a855f7] to-[#22c55e] bg-clip-text text-transparent cursor-pointer">
-              NexgenzCoder
+              NextgenzCoder
             </span>
           </div>
 
