@@ -25,10 +25,10 @@ const Hero = () => {
               HI, I'M
             </h4>
             
-            <h1 className="text-5xl md:text-8xl font-black text-[#e5e7eb] leading-[0.9] tracking-tighter">
+            <h1 className="text-5xl md:text-5xl font-black text-[#e5e7eb] leading-[0.9] tracking-tighter">
               AHMED SALEEM <br />
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-[#3b82f6] via-[#a855f7] to-[#22c55e] inline-block mt-2">
-                FRONT END <br /> DEVELOPER
+              <span className="text-transparent text-4xl bg-clip-text bg-linear-to-r from-[#3b82f6] via-[#a855f7] to-[#22c55e] inline-block mt-2">
+                FRONT END DEVELOPER
               </span>
             </h1>
 
