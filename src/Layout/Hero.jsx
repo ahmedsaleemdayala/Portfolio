@@ -1,12 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import myPicture from '../assets/Ahmed Saleem.jpeg';
+import myPicture from '../assets/Ahmed Saleem.jpeg'; // Ensure file name matches exactly
 
 const Hero = () => {
   const whatsappLink = "https://wa.me/+923333093878";
 
   return (
-    // 'h-screen' ko 'min-h-screen' kiya aur mobile padding 'py-20' add ki
     <section className="relative min-h-screen lg:h-screen bg-[#0f172a] overflow-hidden flex items-center py-20 lg:py-0">
       
       {/* Background Decorative Glows */}
@@ -14,15 +13,14 @@ const Hero = () => {
       <div className="absolute bottom-[10%] right-[0%] w-80 h-80 md:w-125 md:h-125 bg-[#a855f7] opacity-[0.07] blur-[150px] rounded-full"></div>
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full z-10">
-        {/* Mobile par image pehle dikhane ke liye 'flex-col-reverse' use kar sakte hain ya text ko padding dein */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
-          {/* --- LEFT CONTENT --- */}
+          {/* --- LEFT CONTENT (Text Section) --- */}
           <motion.div 
-            initial={{ opacity: 0, y: 20 }} // Mobile par niche se upar aane wala effect behtar lagta hai
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center lg:text-left order-2 lg:order-1" // Mobile par text center mein aur image ke niche
+            className="text-center lg:text-left order-2 lg:order-1"
           >
             <h4 className="text-[#22c55e] font-mono tracking-[0.3em] mb-4 text-xs md:text-sm font-bold">
               HI, I'M
@@ -59,13 +57,14 @@ const Hero = () => {
             </div>
           </motion.div>
 
-          {/* --- RIGHT CONTENT (Image) --- */}
+          {/* --- RIGHT CONTENT (Image & Tech elements) --- */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
-            className="relative flex justify-center order-1 lg:order-2" // Mobile par image upar aayegi
+            className="relative flex justify-center order-1 lg:order-2"
           >
+            {/* Main Image Wrapper */}
             <div className="relative z-10 p-1.5 border border-gray-800 rounded-4xl md:rounded-[2.5rem] bg-[#1e293b]/30 backdrop-blur-sm">
               <div className="w-64 h-80 md:w-96 md:h-120 overflow-hidden rounded-[1.8rem] md:rounded-4xl border border-gray-700 shadow-2xl">
                 <img 
@@ -76,14 +75,39 @@ const Hero = () => {
               </div>
             </div>
 
-            {/* Floating Elements (Mobile par chota kiya) */}
+            {/* 1. TOP RIGHT: React Dev (Floating) */}
             <motion.div 
-              animate={{ y: [0, -10, 0] }}
-              transition={{ repeat: Infinity, duration: 4 }}
-              className="absolute -top-4 -right-2 md:-right-8 bg-[#0f172a]/90 border border-gray-700 p-3 rounded-xl shadow-2xl z-20 backdrop-blur-xl"
+              animate={{ y: [0, -15, 0] }}
+              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+              className="absolute -top-4 -right-2 md:-right-8 bg-[#0f172a]/90 border border-gray-700 p-3 md:p-4 rounded-xl md:rounded-2xl shadow-2xl z-20 backdrop-blur-xl"
             >
-              <p className="text-[#3b82f6] font-mono text-[10px] md:text-xs">{"<React.Dev />"}</p>
+              <div className="flex gap-1.5 mb-1.5 md:mb-2">
+                <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-red-500/50"></div>
+                <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-yellow-500/50"></div>
+                <div className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-green-500/50"></div>
+              </div>
+              <p className="text-[#3b82f6] font-mono text-[10px] md:text-xs font-bold">{"<React.Dev />"}</p>
             </motion.div>
+
+            {/* 2. BOTTOM LEFT: NPM Success (Floating + Loading Bar) */}
+            <motion.div 
+              animate={{ y: [0, 15, 0] }}
+              transition={{ repeat: Infinity, duration: 5, delay: 0.5, ease: "easeInOut" }}
+              className="absolute bottom-6 -left-4 md:-left-12 bg-[#0f172a]/90 border border-gray-800 p-4 md:p-5 rounded-xl md:rounded-2xl shadow-2xl z-20 backdrop-blur-xl"
+            >
+              <p className="text-[#a855f7] font-mono text-[10px] md:text-xs font-bold">{"npm install success"}</p>
+              <div className="mt-2 h-1 w-16 md:w-24 bg-gray-800 rounded-full overflow-hidden">
+                <motion.div 
+                  initial={{ width: "0%" }}
+                  animate={{ width: "85%" }}
+                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+                  className="h-full bg-[#22c55e]"
+                ></motion.div>
+              </div>
+            </motion.div>
+
+            {/* Neon Glow behind the image */}
+            <div className="absolute inset-0 bg-linear-to-tr from-[#3b82f6] to-[#22c55e] opacity-20 blur-[100px] -z-10 rounded-full scale-75"></div>
           </motion.div>
 
         </div>
