@@ -20,7 +20,7 @@ const App = () => {
       <TechEcoSystem />
       <Stats />
       <Testimonials />
-      <Team />
+    
       <Contact />
 
 
