@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nextgenzcoders.netlify.app/sitemap.xml

@@ -29,7 +29,7 @@ const Hero = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#e5e7eb] leading-tight tracking-tighter">
               AHMED SALEEM <br />
               <span className="text-transparent text-3xl md:text-4xl bg-clip-text bg-linear-to-r from-[#3b82f6] via-[#a855f7] to-[#22c55e] inline-block mt-2">
-                FRONT END DEVELOPER
+                FULL STACK DEVELOPER
               </span>
             </h1>
 

@@ -9,7 +9,7 @@ const Navbar = () => {
     { name: 'Projects', href: '#projects' },
     { name: 'Technology Ecosystem', href: '#skills' },
     { name: 'Testimonials', href: '#testimonials' },
-    { name: 'Team', href: '#team' },
+    // { name: 'Team', href: '#team' },
     { name: 'Contact', href: '#contact' },
     
   ];
