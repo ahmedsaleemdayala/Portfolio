@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { FaPhone, FaMapLocationDot, FaLinkedinIn, FaGithub, FaInstagram, FaWhatsapp } from 'react-icons/fa6';
 
-const INITIAL_FORM = { name: '', email: '', phone: '', message: '' };
+// Web3Forms access key — ye public key hai, browser me nazar aana bilkul normal hai.
+// Agar kabhi spam aaye to web3forms.com dashboard se nayi key bana kar yahan replace kar dena.
+const ACCESS_KEY = "9ef2c03c-ad37-40e3-8dfd-d59807351a9e";
 
-// Netlify Forms url-encoded body expect karta hai, JSON nahi
-const encode = (data) =>
-  Object.keys(data)
-    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-    .join('&');
+const INITIAL_FORM = { name: '', email: '', phone: '', message: '' };
 
 const Contact = () => {
   const socialLinks = {
@@ -39,30 +37,37 @@ const Contact = () => {
     setFeedback('');
 
     try {
-      const res = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encode({
-          'form-name': 'contact',
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: ACCESS_KEY,
+          subject: `New project request from ${form.name}`,
+          from_name: "NextGenzCoder Website",
           name: form.name,
           email: form.email,
-          phone: form.phone || 'Not provided',
+          phone: form.phone || "Not provided",
           message: form.message,
         }),
       });
 
-      if (res.ok) {
+      const data = await res.json();
+
+      if (data.success) {
         setStatus('sent');
         setFeedback("Message received. I'll reply within 24 hours.");
         setForm(INITIAL_FORM);
       } else {
         setStatus('error');
-        setFeedback("Message could not be sent. Please reach me on WhatsApp.");
+        setFeedback(data.message || "Message could not be sent. Please reach me on WhatsApp.");
       }
     } catch (err) {
-      console.error('Form error:', err);
+      console.error("Form error:", err);
       setStatus('error');
-      setFeedback('Network error. Check your connection and send again.');
+      setFeedback("Network error. Check your connection and send again.");
     }
   };
 
@@ -115,21 +120,11 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Right Side: Contact Form — Netlify Forms */}
+          {/* Right Side: Contact Form — Web3Forms */}
           <form
-            name="contact"
-            method="POST"
-            data-netlify="true"
-            data-netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
             className="md:w-1/2 w-full bg-[#1e293b]/20 border border-gray-800 rounded-3xl p-10 flex flex-col gap-6"
           >
-            {/* Netlify ke liye zaroori hidden fields */}
-            <input type="hidden" name="form-name" value="contact" />
-            <p className="hidden">
-              <label>Don't fill this out: <input name="bot-field" /></label>
-            </p>
-
             <h3 className="text-2xl font-black text-[#e5e7eb] mb-6 uppercase tracking-wider">Send a Message</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -155,6 +150,9 @@ const Contact = () => {
               value={form.message} onChange={handleChange}
               placeholder="Tell me about your project..." className={inputClass}
             ></textarea>
+
+            {/* Honeypot — spam bots isse fill karte hain, insaan ko nazar nahi aata */}
+            <input type="checkbox" name="botcheck" className="hidden" tabIndex="-1" autoComplete="off" />
 
             <button
               type="submit"
