@@ -39,11 +39,11 @@
     />
     <meta name="twitter:image" content="https://nextgenzcoders.netlify.app/og-image.png" />
 
-    <!-- ===== Icons ===== -->
+    <!-- ===== Icons — logo.png ko public/ folder me rakhna zaroori hai ===== -->
     <link rel="icon" type="image/png" href="/logo.png" />
     <link rel="apple-touch-icon" href="/logo.png" />
 
-    <!-- ===== Fonts (CSS @import se yahan move kiye — bohot tez load hota hai) ===== -->
+    <!-- ===== Fonts (index.css ke @import se yahan move kiye — tez load hota hai) ===== -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -71,16 +71,8 @@
           "addressCountry": "PK"
         },
         "knowsAbout": [
-          "React",
-          "Next.js",
-          "JavaScript",
-          "TypeScript",
-          "Tailwind CSS",
-          "Node.js",
-          "Express",
-          "MongoDB",
-          "PostgreSQL",
-          "Supabase"
+          "React", "Next.js", "JavaScript", "TypeScript", "Tailwind CSS",
+          "Node.js", "Express", "MongoDB", "PostgreSQL", "Supabase"
         ],
         "sameAs": [
           "https://github.com/ahmedsaleemdayala",
@@ -93,7 +85,18 @@
   <body>
     <div id="root"></div>
 
-    <!-- JS band ho to bhi crawler ko kuch mile -->
+    <!--
+      ZAROORI: Netlify ka build bot sirf static HTML scan karta hai, React ka
+      JSX nahi dekh sakta. Is chhupe hue form se woh "contact" form register
+      karta hai. Isko delete mat karna warna form kaam karna band kar dega.
+    -->
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <textarea name="message"></textarea>
+    </form>
+
     <noscript>
       <h1>Ahmed Saleem — Full Stack Web Developer, Karachi</h1>
       <p>

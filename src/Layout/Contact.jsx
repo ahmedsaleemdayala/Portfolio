@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { FaPhone, FaMapLocationDot, FaLinkedinIn, FaGithub, FaInstagram, FaWhatsapp } from 'react-icons/fa6';
 
-// Web3Forms access key — ye public key hai, browser me expose hona bilkul normal hai.
-// Agar kabhi spam aaye to web3forms.com dashboard se nayi key bana kar yahan replace kar dena.
-const ACCESS_KEY = "9ef2c03c-ad37-40e3-8dfd-d59807351a9e";
-
 const INITIAL_FORM = { name: '', email: '', phone: '', message: '' };
+
+// Netlify Forms url-encoded body expect karta hai, JSON nahi
+const encode = (data) =>
+  Object.keys(data)
+    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+    .join('&');
 
 const Contact = () => {
   const socialLinks = {
@@ -37,32 +39,28 @@ const Contact = () => {
     setFeedback('');
 
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch('/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          access_key: ACCESS_KEY,
-          subject: `New project request from ${form.name}`,
-          from_name: 'NextGenzCoder Website',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode({
+          'form-name': 'contact',
           name: form.name,
           email: form.email,
-          phone: form.phone,
+          phone: form.phone || 'Not provided',
           message: form.message,
         }),
       });
 
-      const data = await res.json();
-      console.log("Web3Forms response:", data); // sab theek chalne ke baad ye line hata dena
-
-      if (data.success) {
+      if (res.ok) {
         setStatus('sent');
         setFeedback("Message received. I'll reply within 24 hours.");
         setForm(INITIAL_FORM);
       } else {
         setStatus('error');
-        setFeedback(data.message || 'Message could not be sent. Try WhatsApp instead.');
+        setFeedback("Message could not be sent. Please reach me on WhatsApp.");
       }
-    } catch {
+    } catch (err) {
+      console.error('Form error:', err);
       setStatus('error');
       setFeedback('Network error. Check your connection and send again.');
     }
@@ -117,11 +115,21 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Right Side: Working Contact Form */}
+          {/* Right Side: Contact Form — Netlify Forms */}
           <form
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
             className="md:w-1/2 w-full bg-[#1e293b]/20 border border-gray-800 rounded-3xl p-10 flex flex-col gap-6"
           >
+            {/* Netlify ke liye zaroori hidden fields */}
+            <input type="hidden" name="form-name" value="contact" />
+            <p className="hidden">
+              <label>Don't fill this out: <input name="bot-field" /></label>
+            </p>
+
             <h3 className="text-2xl font-black text-[#e5e7eb] mb-6 uppercase tracking-wider">Send a Message</h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -148,13 +156,10 @@ const Contact = () => {
               placeholder="Tell me about your project..." className={inputClass}
             ></textarea>
 
-            {/* Honeypot — spam bots isse fill karte hain, insaan nahi dekhta */}
-            <input type="checkbox" name="botcheck" className="hidden" tabIndex="-1" autoComplete="off" />
-
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="relative group bg-[#3b82f6] text-white px-8 py-4 rounded-xl font-black uppercase text-lg cursor-pointer transition-all duration-300 mt-2 border-2 border-transparent hover:border-[#a855f7] hover:bg-transparent hover:shadow-[0_0_30px_rgba(168,85,247,0.2)] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#3b82f6] disabled:hover:border-transparent"
+              className="relative group bg-[#3b82f6] text-white px-8 py-4 rounded-xl font-black uppercase text-lg cursor-pointer transition-all duration-300 mt-2 border-2 border-transparent hover:border-[#a855f7] hover:bg-transparent hover:shadow-[0_0_30px_rgba(168,85,247,0.2)] disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <span className="group-hover:bg-linear-to-r group-hover:from-[#3b82f6] group-hover:via-[#a855f7] group-hover:to-[#22c55e] group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
                 {status === 'sending' ? 'Sending...' : 'Send Message'}
