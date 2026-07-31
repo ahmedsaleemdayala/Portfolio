@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { FaPhone, FaMapLocationDot, FaLinkedinIn, FaGithub, FaInstagram, FaWhatsapp } from 'react-icons/fa6';
 
-// 1. https://web3forms.com par apna email (ahmedsaleemdayala@gmail.com) daal kar
-//    free Access Key lo. 2. Us key ko .env file me rakho:  VITE_WEB3FORMS_KEY=xxxx-xxxx
-const ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_KEY;
+// Web3Forms access key — ye public key hai, browser me expose hona bilkul normal hai.
+// Agar kabhi spam aaye to web3forms.com dashboard se nayi key bana kar yahan replace kar dena.
+const ACCESS_KEY = "9ef2c03c-ad37-40e3-8dfd-d59807351a9e";
 
 const INITIAL_FORM = { name: '', email: '', phone: '', message: '' };
 
@@ -52,6 +52,7 @@ const Contact = () => {
       });
 
       const data = await res.json();
+      console.log("Web3Forms response:", data); // sab theek chalne ke baad ye line hata dena
 
       if (data.success) {
         setStatus('sent');
@@ -161,12 +162,24 @@ const Contact = () => {
             </button>
 
             {feedback && (
-              <p
-                role="status"
-                className={`text-sm font-bold text-center ${status === 'sent' ? 'text-[#22c55e]' : 'text-red-400'}`}
-              >
-                {feedback}
-              </p>
+              <div className="text-center">
+                <p
+                  role="status"
+                  className={`text-sm font-bold ${status === 'sent' ? 'text-[#22c55e]' : 'text-red-400'}`}
+                >
+                  {feedback}
+                </p>
+                {status === 'error' && (
+                  <a
+                    href={socialLinks.whatsapp}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-block mt-3 text-[#22c55e] font-bold text-sm underline underline-offset-4 hover:brightness-125"
+                  >
+                    Message me on WhatsApp instead
+                  </a>
+                )}
+              </div>
             )}
           </form>
         </div>
